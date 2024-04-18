@@ -6,7 +6,7 @@ class Solution:
         
         output = [intervals[0]] # initialize with my first [,]
         for start, end in intervals:
-            lastEnd = output[-1][1]a
+            lastEnd = output[-1][1]
             if start<=lastEnd:
                 output[-1][1] = max(lastEnd, end)
             else:
