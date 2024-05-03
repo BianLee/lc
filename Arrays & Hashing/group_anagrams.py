@@ -5,7 +5,7 @@ class Solution:
             count = [0] * 26
             for c in s:
                 count[ord(c) - ord('a')]+=1
-            key = tuple(count)
+            key = tuple(count) #make it immutable by converting to tuple
             if key in res:
                 res[key].append(s)
             else:
