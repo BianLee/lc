@@ -1,12 +1,13 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        i = 0
         memo = dict()
-        def dp(i, memo):
+        def dp(i):
             if i in memo:
                 return memo[i]
             if i >= len(nums):
                 return 0
-            memo[i] = max(dp(i+1, memo), dp(i+2, memo)+nums[i])
+            oneStep = dp(i+1)
+            twoStep = dp(i+2)
+            memo[i] = max(oneStep,  nums[i]+twoStep)
             return memo[i]
-        return dp(i, memo)
+        return dp(0)
