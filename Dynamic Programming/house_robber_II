@@ -1,0 +1,26 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        
+        def dp(i, numsRange):
+            if i in memo:
+                return memo[i]
+            if i >= len(numsRange):
+                return 0
+            memo[i] = max(dp(i+1, numsRange), dp(i+2, numsRange)+numsRange[i])
+            return memo[i]
+
+        if len(nums) == 1:
+            return nums[0]
+        newArrOne = nums[0:len(nums)-1]
+        newArrTwo = nums[1:len(nums)]
+
+        if len(newArrOne) == 2:
+            newArrOne.append(0)
+        if len(newArrTwo) == 2:
+            newArrTwo.append(0)
+
+        memo = dict()
+        first = dp(0, newArrOne)
+        memo = dict()
+        second = dp(0, newArrTwo)
+        return max(first, second)
