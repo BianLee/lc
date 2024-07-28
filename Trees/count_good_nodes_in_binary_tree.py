@@ -29,3 +29,20 @@ class Solution:
                 count+=1
             return dfs(root.left, maxVal) + dfs(root.right, maxVal) + count
         return dfs(root, root.val)
+
+# Another solution
+class Solution:
+    def goodNodes(self, root: TreeNode) -> int:
+        
+        self.count = 0
+        def dfs(root, prevMax):
+            if not root:
+                return 
+            if root.val >= prevMax:
+                prevMax = root.val
+                self.count+=1
+            dfs(root.left, prevMax)
+            dfs(root.right, prevMax)
+            return self.count
+
+        return dfs(root, float('-inf'))
