@@ -19,3 +19,28 @@ class Solution:
             i = j # i is updated to j to move to the next sequence of characters
 
         return index
+
+
+# Same problem with better var name
+class Solution:
+    def compress(self, chars: List[str]) -> int:
+        
+        write = 0
+        i = 0
+    
+        while i < len(chars):
+            j = i
+            while j<len(chars) and chars[j] == chars[i]:
+                j+=1
+            chars[write] = chars[i]
+            write+=1
+            
+            if j-i > 1:
+                strValue = str(j-i)
+                for c in strValue:
+                    chars[write] = c
+                    write+=1
+            
+            i = j
+
+        return write
