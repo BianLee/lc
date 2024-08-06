@@ -1,14 +1,12 @@
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
-
-        sPointer = 0
-        tPointer = 0
-        while sPointer < len(s) and tPointer < len(t):
-            if s[sPointer] == t[tPointer]:
-                sPointer+=1
-                tPointer+=1
-            else:
-                tPointer+=1
-        if sPointer == len(s):
+    
+        s_pointer = 0
+        t_pointer = 0
+        while s_pointer<len(s) and t_pointer<len(t):
+            if t[t_pointer] == s[s_pointer]:
+                s_pointer+=1
+            t_pointer+=1
+    
+        if s_pointer == len(s):
             return True
-        return False
