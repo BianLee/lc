@@ -28,3 +28,34 @@ class Solution:
                 return False
         
         return True
+
+
+#alternative topological sort
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        
+        graph = defaultdict(list)
+        indegree = [0] * numCourses
+        for course, prereq in prerequisites:
+            graph[prereq].append(course)
+            indegree[course]+=1
+
+        #initialize queue with all courses that have no prereqs
+        
+        queue = deque()
+        for i in range(len(indegree)):
+            if indegree[i] == 0:
+                queue.append(i)
+
+        taken_courses = 0
+        while queue:
+            course = queue.popleft()
+            taken_courses += 1
+
+            for neighbor in graph[course]:
+                indegree[neighbor] -= 1
+                
+                if indegree[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        return taken_courses == numCourses
