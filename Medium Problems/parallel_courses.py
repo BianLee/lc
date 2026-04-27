@@ -1,47 +1,43 @@
-from collections import defaultdict
-
 class Solution:
     def minimumSemesters(self, n: int, relations: List[List[int]]) -> int:
-    
-        indegree=dict()
         
+        indegrees = dict()
         for i in range(n):
-            indegree[i+1] = 0
-
+            indegrees[i+1] = 0
         for prev, next in relations:
-            indegree[next] += 1
-        
-        # print(indegree)
-    
+            indegrees[next] += 1
+
+        print(indegrees)
+
         graph = defaultdict(list)
-        
+
         for prev, next in relations:
             graph[prev].append(next)
-    
+        
         print(graph)
 
-        queue = deque()
-        for course in indegree:
-            if indegree[course] == 0: 
-                queue.append(course) #add the course without prereqs into the queue
+        q = deque()
+        for key, value in indegrees.items():
+            if value == 0:
+                q.append(key)
 
-        semesters, taken = 0,0
-        while queue:
-            semesters += 1
-            for i in range(len(queue)):
-                course = queue.popleft()
-                taken += 1
-                for neighbor in graph[course]:
-                    indegree[neighbor] -= 1
-                    if indegree[neighbor] == 0:
-                        queue.append(neighbor)
-
-        if taken == n:
-            return semesters
-        else:
-            return -1
-
+        print(q)
 
         
+        semester, taken = 0, 0
+        while q:
+            semester+=1
+            for i in range(len(q)):
+                course = q.popleft()
+                taken += 1
+                for unlocked in graph[course]:
+                    indegrees[unlocked] -= 1
+                    if indegrees[unlocked] == 0:
+                        q.append(unlocked)
 
+        if taken == n:
+         
+            return semester
 
+        return -1
+                
