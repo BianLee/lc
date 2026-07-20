@@ -10,3 +10,12 @@ class Solution:
             heapq.heappop(maxHeap)
         
         return -1*maxHeap[0]
+
+        '''
+        # solution using min heap
+        heapq.heapify(nums)
+        originalLength = len(nums)
+        for i in range(originalLength - k):
+            heapq.heappop(nums)
+        return nums[0]
+        ''' 
